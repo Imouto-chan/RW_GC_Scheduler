@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+	<GCSchedulerTitle>GC Scheduler</GCSchedulerTitle>
+	<BtnStopGC>Enable GC</BtnStopGC>
+	<BtnStartGC>Disable GC</BtnStartGC>
+	<GCEnabled>Garbage Cleaner has been Enabled!</GCEnabled>
+	<GCDisabled>Garbage Cleaner has been Disabled! Be careful with memory usage!</GCDisabled>
+</LanguageData>

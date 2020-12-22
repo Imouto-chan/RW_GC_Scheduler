@@ -1,0 +1,4 @@
+C:\Users\Love\source\repos\Rimworld Mods\GC_Scheduler\GC_Scheduler\1.2\Assemblies\GC_Scheduler.dll
+C:\Users\Love\source\repos\Rimworld Mods\GC_Scheduler\GC_Scheduler\obj\Debug\GC_Scheduler.csprojAssemblyReference.cache
+C:\Users\Love\source\repos\Rimworld Mods\GC_Scheduler\GC_Scheduler\obj\Debug\GC_Scheduler.csproj.CoreCompileInputs.cache
+C:\Users\Love\source\repos\Rimworld Mods\GC_Scheduler\GC_Scheduler\obj\Debug\GC_Scheduler.dll
