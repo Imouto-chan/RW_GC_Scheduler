@@ -2,8 +2,13 @@
 
 <LanguageData>
 	<GCSchedulerTitle>GC Scheduler</GCSchedulerTitle>
-	<BtnStopGC>Enable GC</BtnStopGC>
-	<BtnStartGC>Disable GC</BtnStartGC>
+	<lblSetMinGCMemory>Set MINIMUM amount of memory to be allocated before GC is used</lblSetMinGCMemory>
+	<lblMinGCMemory>Minimum Memory</lblMinGCMemory>
+	<lblSetTickInterval>Set amount of ticks to pass before updating memory information</lblSetTickInterval>
+	<BtnStartGC>Enable GC</BtnStartGC>
+	<BtnStopGC>Disable GC</BtnStopGC>
+	<GCStatusEnabled>Status: GC Enabled</GCStatusEnabled>
+	<GCStatusDisabled>Status: GC Disabled</GCStatusDisabled>
 	<GCEnabled>Garbage Cleaner has been Enabled!</GCEnabled>
 	<GCDisabled>Garbage Cleaner has been Disabled! Be careful with memory usage!</GCDisabled>
 </LanguageData>
