@@ -45,11 +45,22 @@ namespace GC_Scheduler
             {
                 listing.Label("GCStatusDisabled".Translate());
             }
+
+            Rect section2 = new Rect(rect.x, rect.y + listing.CurHeight + 25f, rect.width, 25f);
+            Widgets.CheckboxLabeled(section2, "lblSetMinGCMemory".Translate(), ref setMinMem);
+            if (setMinMem) // Bar to set total memory to keep track of and minimum memory before using GC
+            {
+                Rect section2sub = new Rect(rect.x, rect.y + section2.y + section2.height + 10f, rect.width, 25f);
+                section2.height += 25f;
+                MainButtonWorker_GC_Scheduler.totalMemory = Widgets.HorizontalSlider(section2sub, MainButtonWorker_GC_Scheduler.totalMemory,
+                                                                2048f, (float)SystemInfo.systemMemorySize - 2048f,
+                                                                leftAlignedLabel: "2048 MB", rightAlignedLabel: ((float)SystemInfo.systemMemorySize - 2048f).ToString() + " MB",
+                                                                label: "lblMinGCMemory".Translate() + ": " + MainButtonWorker_GC_Scheduler.totalMemory.ToString() + " MB");
+            }
+
             listing.End();
 
-            Rect subRect = new Rect(rect.x, rect.y + listing.CurHeight - 25f, rect.width, rect.height - listing.CurHeight); // Makes sure subRect does not overlap
-            GUI.BeginGroup(subRect);
-
+            Rect section3 = new Rect(rect.x, rect.y + section2.y + section2.height + 35f, rect.width, 100f);
             List<ListableOption> list = new List<ListableOption>(); // List to add buttons to
             list.Add(new ListableOption("BtnStopGC".Translate(), delegate () // enable GC
             {
@@ -61,25 +72,15 @@ namespace GC_Scheduler
                 UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Enabled;
                 Messages.Message("GCEnabled".Translate(), MessageTypeDefOf.PositiveEvent, false);
             }, null));
-
-            OptionListingUtility.DrawOptionListing(subRect, list); // Add buttons to tab
-
-            bool setMinMem = false;
-            Widgets.CheckboxLabeled(new Rect(rect.x, rect.y + subRect.height, rect.width, 25f), "lblSetMinGCMemory".Translate(), ref setMinMem);
-            //if (setMinMem) // Bar to set total memory to keep track of and minimum memory before using GC
-            //{
-            //    MainButtonWorker_GC_Scheduler.totalMemory = Widgets.HorizontalSlider(subRect, MainButtonWorker_GC_Scheduler.totalMemory,
-            //                                                    2048f, (float)SystemInfo.systemMemorySize - 2048f,
-            //                                                    leftAlignedLabel: "2048Mb", rightAlignedLabel: ((float)SystemInfo.systemMemorySize - 2048f).ToString(),
-            //                                                    label: "lblMinGCMemory".Translate() + ": " + MainButtonWorker_GC_Scheduler.totalMemory.ToString());
-            //}
+            OptionListingUtility.DrawOptionListing(section3, list); // Add buttons to tab
 
             //// Bar to set amount of ticks to pass before updating memory
             //MainButtonWorker_GC_Scheduler.updateInterval = (int)Widgets.HorizontalSlider(subRect, MainButtonWorker_GC_Scheduler.updateInterval,
             //                                                    300f, 3600f, label: "lblSetTickInterval".Translate());
 
             GUI.EndGroup();
-            GUI.EndGroup();
         }
+
+        bool setMinMem = false;
     }
 }
