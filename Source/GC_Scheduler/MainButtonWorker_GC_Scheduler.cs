@@ -14,16 +14,21 @@ namespace GC_Scheduler
         {
             get
             {
-                updateTick++;
-
-                if (updateTick > updateInterval) // only run on certain ticks so it does not constantly run
+                if (gcScheduler)
                 {
-                    updateTick = 0;
-                    currentMemory = (float)GC.GetTotalMemory(false) / 1024f / 1024f; // get current heap usage and convert into MB and then get percent of totalMemory
-                    base.def.description = currentMemory + " / " + totalMemory; // display memory information in tooltip/description of tab
+                    updateTick++;
+
+                    if (updateTick > updateInterval) // only run on certain ticks so it does not constantly run
+                    {
+                        updateTick = 0;
+                        currentMemory = (float)GC.GetTotalMemory(false) / 1024f / 1024f; // get current heap usage and convert into MB and then get percent of totalMemory
+                        base.def.description = currentMemory + " / " + totalMemory; // display memory information in tooltip/description of tab
+                    }
+
+                    return currentMemory / totalMemory;
                 }
 
-                return currentMemory / totalMemory;
+                return 0f;
             }
         }
 
@@ -31,5 +36,6 @@ namespace GC_Scheduler
         public static int updateInterval = 360; // how often to run
         private static float currentMemory = 0f;
         public static float totalMemory = 5000f;
+        public static bool gcScheduler = false;
     }
 }

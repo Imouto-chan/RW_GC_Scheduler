@@ -2,8 +2,9 @@
 
 <LanguageData>
 	<GCSchedulerTitle>GC Scheduler</GCSchedulerTitle>
-	<lblSetMinGCMemory>Set MINIMUM amount of memory to be allocated before GC is used</lblSetMinGCMemory>
 	<lblMinGCMemory>Minimum Memory</lblMinGCMemory>
+	<lblMinGCMemoryDescription>Set MINIMUM amount of memory to be used before GC is called</lblMinGCMemoryDescription>
+	<enableGCScheduler>Enable GC Scheduler</enableGCScheduler>
 	<lblSetTickInterval>Set amount of ticks to pass before updating memory information</lblSetTickInterval>
 	<BtnStartGC>Enable GC</BtnStartGC>
 	<BtnStopGC>Disable GC</BtnStopGC>
