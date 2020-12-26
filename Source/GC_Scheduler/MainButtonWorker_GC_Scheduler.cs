@@ -35,7 +35,7 @@ namespace GC_Scheduler
         private static int updateTick = 0;
         public static int updateInterval = 360; // how often to run
         private static float currentMemory = 0f;
-        public static float totalMemory = 5000f;
+        public static float totalMemory = 2000f;
         public static bool gcScheduler = false;
     }
 }

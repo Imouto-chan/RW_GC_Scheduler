@@ -52,18 +52,18 @@ namespace GC_Scheduler
             if (MainButtonWorker_GC_Scheduler.gcScheduler)
             {
                 listing.Gap(5f);
-                listing.CheckboxLabeled("lblMinGCMemory".Translate() + ": " + MainButtonWorker_GC_Scheduler.totalMemory.ToString() + " MB", ref setMinMem, "lblMinGCMemoryDescription".Translate());
-                Rect section2 = new Rect(rect.x, rect.y + listing.CurHeight + 10f, rect.width, 0f);
+                listing.Label("lblSetTickInterval".Translate() + ": " + MainButtonWorker_GC_Scheduler.updateInterval + " ticks", tooltip: "lblSetTickIntervalDescription".Translate());
+                Rect section2 = new Rect(rect.x, rect.y + listing.CurHeight + 10f, rect.width, 25f); // Bar to set amount of ticks to pass before updating memory
+                MainButtonWorker_GC_Scheduler.updateInterval = (int)Widgets.HorizontalSlider(section2, MainButtonWorker_GC_Scheduler.updateInterval, 300f, 3600f, leftAlignedLabel: "300", rightAlignedLabel: "3600");
 
-                if (setMinMem) // Bar to set total memory to keep track of and minimum memory before using GC
-                {
-                    section2.height = 25f;
-                    MainButtonWorker_GC_Scheduler.totalMemory = Widgets.HorizontalSlider(section2, MainButtonWorker_GC_Scheduler.totalMemory,
-                                                                    2048f, (float)SystemInfo.systemMemorySize - 2048f,
-                                                                    leftAlignedLabel: "2048 MB", rightAlignedLabel: ((float)SystemInfo.systemMemorySize - 2048f).ToString() + " MB");
-                }
+                listing.Gap(40f);
+                listing.Label("lblMinGCMemory".Translate() + ": " + MainButtonWorker_GC_Scheduler.totalMemory.ToString() + " MB", tooltip: "lblMinGCMemoryDescription".Translate());
+                Rect section3 = new Rect(rect.x, rect.y + listing.CurHeight + 10f, rect.width, 25f); // Bar to set total memory to keep track of and minimum memory before using GC
+                MainButtonWorker_GC_Scheduler.totalMemory = Widgets.HorizontalSlider(section3, MainButtonWorker_GC_Scheduler.totalMemory,
+                                                                                    1024f, Math.Max((float)SystemInfo.systemMemorySize - 4096f, 2048f),
+                                                                                    leftAlignedLabel: "1024 MB", rightAlignedLabel: Math.Max((float)SystemInfo.systemMemorySize - 4096f, 2048f).ToString() + " MB");
                 
-                Rect section3 = new Rect(rect.x, rect.y + section2.y + section2.height + 35f, rect.width, 100f);
+                Rect section4 = new Rect(rect.x, rect.y + section3.y + section3.height + 35f, rect.width, 100f);
                 List<ListableOption> list = new List<ListableOption>(); // List to add buttons to
                 list.Add(new ListableOption("BtnStopGC".Translate(), delegate () // enable GC
                 {
@@ -75,17 +75,11 @@ namespace GC_Scheduler
                     UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Enabled;
                     Messages.Message("GCEnabled".Translate(), MessageTypeDefOf.PositiveEvent, false);
                 }, null));
-                OptionListingUtility.DrawOptionListing(section3, list); // Add buttons to tab
-
-                //// Bar to set amount of ticks to pass before updating memory
-                //MainButtonWorker_GC_Scheduler.updateInterval = (int)Widgets.HorizontalSlider(subRect, MainButtonWorker_GC_Scheduler.updateInterval,
-                //                                                    300f, 3600f, label: "lblSetTickInterval".Translate());
+                OptionListingUtility.DrawOptionListing(section4, list); // Add buttons to tab
             }
 
             listing.End();
             GUI.EndGroup();
         }
-
-        bool setMinMem = false;
     }
 }

@@ -3,9 +3,10 @@
 <LanguageData>
 	<GCSchedulerTitle>GC Scheduler</GCSchedulerTitle>
 	<lblMinGCMemory>Minimum Memory</lblMinGCMemory>
-	<lblMinGCMemoryDescription>Set MINIMUM amount of memory to be used before GC is called</lblMinGCMemoryDescription>
+	<lblMinGCMemoryDescription>Set MINIMUM amount of memory to be used before GC is called.</lblMinGCMemoryDescription>
 	<enableGCScheduler>Enable GC Scheduler</enableGCScheduler>
-	<lblSetTickInterval>Set amount of ticks to pass before updating memory information</lblSetTickInterval>
+	<lblSetTickInterval>Tick Interval</lblSetTickInterval>
+	<lblSetTickIntervalDescription>Sets amount of ticks that need to pass before updating memory usage (this interval is also used for how often the GC Scheduler is ran). At 1x speed 60 ticks is 1 second.</lblSetTickIntervalDescription>
 	<BtnStartGC>Enable GC</BtnStartGC>
 	<BtnStopGC>Disable GC</BtnStopGC>
 	<GCStatusEnabled>Status: GC Enabled</GCStatusEnabled>
