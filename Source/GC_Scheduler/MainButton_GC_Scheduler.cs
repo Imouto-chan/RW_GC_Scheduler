@@ -18,7 +18,7 @@ namespace GC_Scheduler
 
         public override Vector2 RequestedTabSize
         {
-            get { return new Vector2(250f, 500f); } // Size of window tab to open
+            get { return new Vector2(250f, 475f); } // Size of window tab to open
         }
 
         public override MainTabWindowAnchor Anchor
@@ -46,12 +46,18 @@ namespace GC_Scheduler
                 listing.Label("GCStatusDisabled".Translate());
             }
 
-            listing.Gap(5f);
-            listing.CheckboxLabeled("enableGCScheduler".Translate(), ref MainButtonWorker_GC_Scheduler.gcScheduler);
+            listing.CheckboxLabeled("enableGCScheduler".Translate(), ref MainButtonWorker_GC_Scheduler.gcScheduler); // Display button whether to enable the GC Scheduler or not
 
             if (MainButtonWorker_GC_Scheduler.gcScheduler)
             {
+                listing.Gap(5f); // Display current update tick the game is on
+                listing.Label("lblCurrentTickInterval".Translate() + ": " + MainButtonWorker_GC_Scheduler.updateTick + " / " + MainButtonWorker_GC_Scheduler.updateInterval);
+                listing.Gap(5f); // Display current memory usage
+                listing.Label("lblCurrentMemoryUsage".Translate() + ": \n" + MainButtonWorker_GC_Scheduler.currentMemory + " MB / " + MainButtonWorker_GC_Scheduler.totalMemory + " MB");
+                listing.Gap(5f); // Display option whether or not to force pause the game when the menu is opened
+                listing.CheckboxLabeled("lblForcePause".Translate(), ref forcePause, "lblForcePauseDescription".Translate());
                 listing.Gap(5f);
+
                 listing.Label("lblSetTickInterval".Translate() + ": " + MainButtonWorker_GC_Scheduler.updateInterval + " ticks", tooltip: "lblSetTickIntervalDescription".Translate());
                 Rect section2 = new Rect(rect.x, rect.y + listing.CurHeight + 10f, rect.width, 25f); // Bar to set amount of ticks to pass before updating memory
                 MainButtonWorker_GC_Scheduler.updateInterval = (int)Widgets.HorizontalSlider(section2, MainButtonWorker_GC_Scheduler.updateInterval, 300f, 3600f, leftAlignedLabel: "300", rightAlignedLabel: "3600");
@@ -63,18 +69,20 @@ namespace GC_Scheduler
                                                                                     1024f, Math.Max((float)SystemInfo.systemMemorySize - 4096f, 2048f),
                                                                                     leftAlignedLabel: "1024 MB", rightAlignedLabel: Math.Max((float)SystemInfo.systemMemorySize - 4096f, 2048f).ToString() + " MB");
                 
-                Rect section4 = new Rect(rect.x, rect.y + section3.y + section3.height + 35f, rect.width, 100f);
-                List<ListableOption> list = new List<ListableOption>(); // List to add buttons to
-                list.Add(new ListableOption("BtnStopGC".Translate(), delegate () // enable GC
+                Rect section4 = new Rect(rect.x, rect.y + section3.y + section3.height + 20f, rect.width, 100f);
+                List<ListableOption> list = new List<ListableOption>
                 {
-                    UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Disabled;
-                    Messages.Message("GCDisabled".Translate(), MessageTypeDefOf.PositiveEvent, false);
-                }, null));
-                list.Add(new ListableOption("BtnStartGC".Translate(), delegate () // disable GC
-                {
-                    UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Enabled;
-                    Messages.Message("GCEnabled".Translate(), MessageTypeDefOf.PositiveEvent, false);
-                }, null));
+                    new ListableOption("BtnStopGC".Translate(), delegate () // enable GC
+                    {
+                        UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Disabled;
+                        Messages.Message("GCDisabled".Translate(), MessageTypeDefOf.PositiveEvent, false);
+                    }, null),
+                    new ListableOption("BtnStartGC".Translate(), delegate () // disable GC
+                    {
+                        UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Enabled;
+                        Messages.Message("GCEnabled".Translate(), MessageTypeDefOf.PositiveEvent, false);
+                    }, null)
+                }; // List to add buttons to
                 OptionListingUtility.DrawOptionListing(section4, list); // Add buttons to tab
             }
 

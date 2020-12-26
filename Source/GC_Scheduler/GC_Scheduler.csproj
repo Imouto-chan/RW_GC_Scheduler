@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="MainButtonWorker_GC_Scheduler.cs" />
     <Compile Include="MainButton_GC_Scheduler.cs" />
+    <Compile Include="ModSettings_GC_Scheduler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
