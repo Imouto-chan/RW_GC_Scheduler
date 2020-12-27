@@ -5,6 +5,7 @@
 	<lblMinGCMemory>Minimum Memory</lblMinGCMemory>
 	<lblMinGCMemoryDescription>Set MINIMUM amount of memory to be used before GC is called.</lblMinGCMemoryDescription>
 	<enableGCScheduler>Enable GC Scheduler</enableGCScheduler>
+	<lblTicks>ticks</lblTicks>
 	<lblSetTickInterval>Tick Interval</lblSetTickInterval>
 	<lblCurrentTickInterval>Current Tick Interval</lblCurrentTickInterval>
 	<lblCurrentMemoryUsage>Current Memory Usage</lblCurrentMemoryUsage>
