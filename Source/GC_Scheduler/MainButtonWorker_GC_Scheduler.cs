@@ -18,23 +18,30 @@ namespace GC_Scheduler
         {
             get
             {
-                if (ModSettings_GC_Scheduler.settings.gcScheduler)
+                if (ModSettings_GC_Scheduler.gcScheduler)
                 {
                     updateTick++;
 
-                    if (updateTick > ModSettings_GC_Scheduler.settings.updateInterval) // only run on certain ticks so it does not constantly run
+                    if (updateTick > ModSettings_GC_Scheduler.updateInterval) // only run on certain ticks so it does not constantly run
                     {
                         updateTick = 0;
                         currentMemory = (float)GC.GetTotalMemory(false) / 1024f / 1024f; // get current heap usage and convert into MB and then get percent of totalMemory
                         base.def.description = "lblCurrentMemoryUsage".Translate() + ": \n" 
-                                                + currentMemory + " MB / " + ModSettings_GC_Scheduler.settings.totalMemory + " MB"; // display memory information in tooltip/description of tab
+                                                + currentMemory + " MB / " + ModSettings_GC_Scheduler.totalMemory + " MB"; // display memory information in tooltip/description of tab
                     }
 
-                    return currentMemory / ModSettings_GC_Scheduler.settings.totalMemory;
+                    return currentMemory / ModSettings_GC_Scheduler.totalMemory;
                 }
 
                 return 0f;
             }
+        }
+
+        public override void DoButton(Rect rect)
+        {
+            if (ModSettings_GC_Scheduler.showMainTab)
+                base.DoButton(rect);
+            return;
         }
     }
 }

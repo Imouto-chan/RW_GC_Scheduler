@@ -18,4 +18,5 @@
 	<GCStatusDisabled>Status: GC Disabled!!!</GCStatusDisabled>
 	<GCEnabled>Garbage Cleaner has been Enabled!</GCEnabled>
 	<GCDisabled>Garbage Cleaner has been Disabled! Be careful with memory usage!</GCDisabled>
+	<ShowMainTab>Show the GC Scheduler tab in-game?</ShowMainTab>
 </LanguageData>
