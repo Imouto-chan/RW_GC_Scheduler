@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace GC_Scheduler
         public Mod_GC_Scheduler(ModContentPack content) : base(content)
         {
             settings = GetSettings<ModSettings_GC_Scheduler>(); // Load mod settings
+            if (ModSettings_GC_Scheduler.gcScheduler)
+                UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Enabled;
             ModSettings_GC_Scheduler.thisMod = this;
         }
 

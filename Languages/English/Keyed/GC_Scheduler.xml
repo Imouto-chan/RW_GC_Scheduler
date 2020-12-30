@@ -4,20 +4,20 @@
 	<GCSchedulerTitle>GC Scheduler</GCSchedulerTitle>
 	<lblMinGCMemory>Minimum Memory</lblMinGCMemory>
 	<lblMinGCMemoryDescription>Set MINIMUM amount of memory to be used before GC is called.</lblMinGCMemoryDescription>
-	<enableGCScheduler>Enable GC Scheduler</enableGCScheduler>
 	<lblTicks>ticks</lblTicks>
 	<lblSetTickInterval>Tick Interval</lblSetTickInterval>
 	<lblCurrentTickInterval>Current Tick Interval</lblCurrentTickInterval>
 	<lblCurrentMemoryUsage>Current Memory Usage</lblCurrentMemoryUsage>
 	<lblForcePause>Force Pause Game</lblForcePause>
 	<lblForcePauseDescription>Enable to force the game to pause when the menu is opened</lblForcePauseDescription>
-	<lblSetTickIntervalDescription>Sets amount of ticks that need to pass before updating memory usage (this interval is also used for how often the GC Scheduler is ran). At 1x speed 60 ticks is 1 second.</lblSetTickIntervalDescription>
-	<BtnStartGC>Enable GC</BtnStartGC>
-	<BtnStopGC>Disable GC</BtnStopGC>
-	<lblGCStatusEnabled>Status: GC Enabled</lblGCStatusEnabled>
-	<lblGCStatusDisabled>Status: GC Disabled!!!</lblGCStatusDisabled>
+	<lblSetTickIntervalDescription>Sets amount of ticks that need to pass before updating memory usage (this interval is also used for how often the GC Scheduler is ran). 60 ticks is about 1 second.</lblSetTickIntervalDescription>
+	<BtnStartGC1>Disable GC Scheduler</BtnStartGC1>
+	<BtnStartGC2>(Enable Auto GC)</BtnStartGC2>
+	<BtnStopGC1>Enable GC Scheduler</BtnStopGC1>
+	<BtnStopGC2>(Disable Auto GC)</BtnStopGC2>
+	<lblGCStatusEnabled>Status: Auto GC Enabled</lblGCStatusEnabled>
+	<lblGCStatusDisabled>Status: Auto GC Disabled</lblGCStatusDisabled>
 	<GCEnabled>Garbage Cleaner has been Enabled!</GCEnabled>
-	<GCDisabled>Garbage Cleaner has been Disabled! Be careful with memory usage!</GCDisabled>
-	<ShowMainTab>Show the GC Scheduler tab in-game?</ShowMainTab>
+	<GCDisabled>Garbage Cleaner has been Disabled! Now using GC Scheduler!</GCDisabled>
 	<lblStatsNote>NOTE: "Current" Stats are only updated while in-game!</lblStatsNote>
 </LanguageData>

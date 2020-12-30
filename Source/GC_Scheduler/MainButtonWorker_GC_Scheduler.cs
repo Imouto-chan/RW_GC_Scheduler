@@ -26,6 +26,8 @@ namespace GC_Scheduler
                     {
                         updateTick = 0;
                         currentMemory = (float)GC.GetTotalMemory(false) / 1024f / 1024f; // get current heap usage and convert into MB and then get percent of totalMemory
+                        // Enable and then disable GC on next tick that memory is lowered in order to force the game to collect garbage
+                        UnityEngine.Scripting.GarbageCollector.GCMode = (currentMemory >= ModSettings_GC_Scheduler.totalMemory) ? UnityEngine.Scripting.GarbageCollector.Mode.Enabled : UnityEngine.Scripting.GarbageCollector.Mode.Disabled;
                         base.def.description = "lblCurrentMemoryUsage".Translate() + ": \n" 
                                                 + currentMemory + " MB / " + ModSettings_GC_Scheduler.totalMemory + " MB"; // display memory information in tooltip/description of tab
                     }
@@ -35,13 +37,6 @@ namespace GC_Scheduler
 
                 return 0f;
             }
-        }
-
-        public override void DoButton(Rect rect)
-        {
-            if (ModSettings_GC_Scheduler.showMainTab)
-                base.DoButton(rect);
-            return;
         }
     }
 }
