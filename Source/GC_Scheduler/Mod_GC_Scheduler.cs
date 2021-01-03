@@ -1,9 +1,10 @@
-﻿using RimWorld;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HarmonyLib;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -19,6 +20,7 @@ namespace GC_Scheduler
             if (ModSettings_GC_Scheduler.gcScheduler)
                 UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Enabled;
             ModSettings_GC_Scheduler.thisMod = this;
+            new Harmony("Imouto.mods").PatchAll();  // Runs all harmony Patches found in this assembly
         }
 
         public override string SettingsCategory()

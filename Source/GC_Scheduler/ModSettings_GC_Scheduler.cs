@@ -1,9 +1,9 @@
-﻿using RimWorld;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -105,8 +105,6 @@ namespace GC_Scheduler
                     UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Disabled;
                     gcScheduler = true;
                     Messages.Message("GCDisabled".Translate(), MessageTypeDefOf.PositiveEvent, false);
-                    Log.Warning(UnityEngine.Scripting.GarbageCollector.isIncremental.ToString());
-                    Log.Warning(UnityEngine.Scripting.GarbageCollector.incrementalTimeSliceNanoseconds.ToString());
                 }, null));
             }
             else
@@ -117,8 +115,6 @@ namespace GC_Scheduler
                     UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Enabled;
                     gcScheduler = false;
                     Messages.Message("GCEnabled".Translate(), MessageTypeDefOf.PositiveEvent, false);
-                    Log.Warning(UnityEngine.Scripting.GarbageCollector.isIncremental.ToString());
-                    Log.Warning(UnityEngine.Scripting.GarbageCollector.incrementalTimeSliceNanoseconds.ToString());
                 }, null));
             }
             OptionListingUtility.DrawOptionListing(sectionEnd, list); // Adds buttons to section4
