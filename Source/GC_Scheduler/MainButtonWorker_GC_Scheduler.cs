@@ -30,6 +30,7 @@ namespace GC_Scheduler
                         // Enable and then disable GC on next tick that memory is lowered in order to force the game to collect garbage
                         if (currentMemory >= ModSettings_GC_Scheduler.totalMemory || forceGC)
                         {
+                            Log.Warning("GC enabled");
                             UnityEngine.Scripting.GarbageCollector.GCMode = UnityEngine.Scripting.GarbageCollector.Mode.Enabled;
                             forceGC = false;
                         }
