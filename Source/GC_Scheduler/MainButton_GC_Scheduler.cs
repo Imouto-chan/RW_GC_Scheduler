@@ -30,13 +30,6 @@ namespace GC_Scheduler
 
         public override void PreClose()
         {
-            foreach (Type subClass in typeof(MainTabWindow).AllSubclassesNonAbstract())
-            {
-                if (true)
-                {
-                    Log.Warning(subClass.FullName);
-                }
-            }
             // Writes settings to make sure they are saved just before menu is closed
             LoadedModManager.WriteModSettings(ModSettings_GC_Scheduler.thisMod.Content.FolderName, ModSettings_GC_Scheduler.thisMod.GetType().Name, Mod_GC_Scheduler.settings);
             base.PreClose();

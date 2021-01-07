@@ -16,6 +16,9 @@ namespace GC_Scheduler
         public static float totalMemory = Math.Max(((float)SystemInfo.systemMemorySize - 4096f) / 2f, 1024f);
         public static bool gcScheduler = false;
         public static bool forcePause = true;
+        public static bool enableGC_OnOpenTab = true;
+        public static bool enableGC_OnOpenMap = true;
+        public static bool enableGC_OnOpenMessage = true;
 
         public override void ExposeData() // Method used to write settings so that they are saved
         {

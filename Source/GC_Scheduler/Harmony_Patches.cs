@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HarmonyLib;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace GC_Scheduler
@@ -26,16 +27,23 @@ namespace GC_Scheduler
     {
         public static IEnumerable<MethodBase> TargetMethods() // Tells Harmony to patch all methods returned by this method
         {
-            foreach (Type subClass in typeof(MainTabWindow).AllSubclassesNonAbstract()) // Gets all subclasses of the class MainTabWindow
-                yield return subClass.GetMethod("PreOpen"); // Gets the method in the class with the name PreOpen
+            foreach (Type subClass in typeof(Window).AllSubclassesNonAbstract()) // Gets all subclasses of the class MainTabWindow
+            {
+                // Need to exclude classes with Texture2D members as they will cause errors during Harmony Patching
+                if (subClass.GetFields(BindingFlags.NonPublic | BindingFlags.Static).All(field => !field.FieldType.Equals(typeof(Texture2D)))
+                    && subClass.GetFields(BindingFlags.Public | BindingFlags.Static).All(field => !field.FieldType.Equals(typeof(Texture2D))))
+                    yield return subClass.GetMethod("PreOpen"); // Gets the method in the class with the name PreOpen
+            }
         }
 
         // Postfix method is called after the patched method is ran
-        public static void Postfix(MainTabWindow __instance)
+        public static void Postfix(Window __instance)
         {
             string classBaseType = __instance.GetType().BaseType.ToString();
             // Only run GC when these windows open
-            if (classBaseType.Contains("MainTabWindow") || classBaseType.Contains("Dialog_NodeTree") || __instance.GetType().FullDescription().Contains("WorldInspectPane"))
+            if ((classBaseType.Contains("MainTabWindow") && ModSettings_GC_Scheduler.enableGC_OnOpenTab) 
+                || (classBaseType.Contains("Dialog_NodeTree") && ModSettings_GC_Scheduler.enableGC_OnOpenMessage) 
+                || (__instance.GetType().FullDescription().Contains("WorldInspectPane") && ModSettings_GC_Scheduler.enableGC_OnOpenMap))
                 MainButtonWorker_GC_Scheduler.forceGC = true;
         }
     }
