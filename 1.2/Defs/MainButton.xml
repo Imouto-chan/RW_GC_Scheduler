@@ -9,6 +9,6 @@
     <order>492</order>
     <validWithoutMap>true</validWithoutMap>
 	<minimized>True</minimized>
-	<!--<iconPath>...</iconPath> Maybe change later-->
+	<iconPath>UI/GC_Scheduler/MainTabIcon</iconPath>
   </MainButtonDef>
 </Defs>
