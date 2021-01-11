@@ -9,7 +9,7 @@
 	<lblCurrentTickInterval>Current Tick Interval</lblCurrentTickInterval>
 	<lblCurrentMemoryUsage>Current Memory Usage</lblCurrentMemoryUsage>
 	<lblForcePause>Force Pause Game</lblForcePause>
-	<lblForcePauseDescription>Enable to force the game to pause when the menu is opened</lblForcePauseDescription>
+	<lblForcePauseDescription>Enable to force the game to pause when the menu is opened (in-game)</lblForcePauseDescription>
 	<lblSetTickIntervalDescription>Sets amount of ticks that need to pass before updating memory usage (this interval is also used for how often the GC Scheduler is ran). 60 ticks is about 1 second.</lblSetTickIntervalDescription>
 	<BtnStartGC1>Disable GC Scheduler</BtnStartGC1>
 	<BtnStartGC2>(Enable Auto GC)</BtnStartGC2>
@@ -20,4 +20,10 @@
 	<GCEnabled>Garbage Cleaner has been Enabled!</GCEnabled>
 	<GCDisabled>Garbage Cleaner has been Disabled! Now using GC Scheduler!</GCDisabled>
 	<lblStatsNote>NOTE: "Current" Stats are only updated while in-game!</lblStatsNote>
+	<lblRunGCWhen>Enable GC When You...:</lblRunGCWhen>
+	<lblRunGCWhenDescription>I recommend leaving these enabled so the GC can run at a time when you won't notice</lblRunGCWhenDescription>
+	<lblRunGConMainTabOpen>Open Main Tab</lblRunGConMainTabOpen>
+	<lblRunGConMainTabOpenDescription>Enables the GC when you open a tab such as the architect tab or map tab</lblRunGConMainTabOpenDescription>
+	<lblRunGConNotifyOpen>Open Notification Window</lblRunGConNotifyOpen>
+	<lblRunGConNotifyOpenDescription>Enables the GC when you open a notification message</lblRunGConNotifyOpenDescription>
 </LanguageData>

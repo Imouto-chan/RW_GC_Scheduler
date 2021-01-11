@@ -41,9 +41,8 @@ namespace GC_Scheduler
         {
             string classBaseType = __instance.GetType().BaseType.ToString();
             // Only run GC when these windows open
-            if ((classBaseType.Contains("MainTabWindow") && ModSettings_GC_Scheduler.enableGC_OnOpenTab) 
-                || (classBaseType.Contains("Dialog_NodeTree") && ModSettings_GC_Scheduler.enableGC_OnOpenMessage) 
-                || (__instance.GetType().FullDescription().Contains("WorldInspectPane") && ModSettings_GC_Scheduler.enableGC_OnOpenMap))
+            if (((classBaseType.Contains("MainTabWindow") || __instance.GetType().FullDescription().Contains("WorldInspectPane")) && ModSettings_GC_Scheduler.enableGC_OnOpenTab) 
+                || (classBaseType.Contains("Dialog_NodeTree") && ModSettings_GC_Scheduler.enableGC_OnOpenMessage))
                 MainButtonWorker_GC_Scheduler.forceGC = true;
         }
     }

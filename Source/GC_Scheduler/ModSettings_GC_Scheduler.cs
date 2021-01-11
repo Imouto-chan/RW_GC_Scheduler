@@ -17,7 +17,6 @@ namespace GC_Scheduler
         public static bool gcScheduler = false;
         public static bool forcePause = true;
         public static bool enableGC_OnOpenTab = true;
-        public static bool enableGC_OnOpenMap = true;
         public static bool enableGC_OnOpenMessage = true;
 
         public override void ExposeData() // Method used to write settings so that they are saved
@@ -26,11 +25,14 @@ namespace GC_Scheduler
             Scribe_Values.Look(ref totalMemory, "totalMemory", Math.Max(((float)SystemInfo.systemMemorySize - 4096f) / 2f, 1024f));
             Scribe_Values.Look(ref gcScheduler, "gcScheduler", false);
             Scribe_Values.Look(ref forcePause, "forcePause", true);
+            Scribe_Values.Look(ref enableGC_OnOpenTab, "enableGC_OnOpenTab", true);
+            Scribe_Values.Look(ref enableGC_OnOpenMessage, "enableGC_OnOpenMessage", true);
             base.ExposeData();
         }
 
         public void DoSettingsWindow(Rect rect)
         {
+            rect.y -= 10;
             GUI.BeginGroup(rect);
 
             Listing_Standard listing = new Listing_Standard();
@@ -39,8 +41,8 @@ namespace GC_Scheduler
             listing.Label("lblStatsNote".Translate());
             listing.End();
 
-            Rect section2 = new Rect(rect.x, rect.y + 20f, rect.width, 450f);
-            DoInGameSettingsWindwo(section2, sectionOffsetY: -55f );
+            Rect section2 = new Rect(rect.x, rect.y, rect.width, 450f);
+            DoInGameSettingsWindwo(section2, sectionOffsetY: -30f );
 
             GUI.EndGroup();
         }
@@ -55,7 +57,7 @@ namespace GC_Scheduler
             listing.Label("GCSchedulerTitle".Translate());
             Text.Font = GameFont.Small; // Writes following labels in small font
 
-            if (UnityEngine.Scripting.GarbageCollector.GCMode == UnityEngine.Scripting.GarbageCollector.Mode.Enabled) // Display status to show if GC is enabled or disabled
+            if (UnityEngine.Scripting.GarbageCollector.GCMode == UnityEngine.Scripting.GarbageCollector.Mode.Enabled && !gcScheduler) // Display status to show if GC is enabled or disabled
             {
                 listing.Label("lblGCStatusEnabled".Translate());
             }
@@ -77,7 +79,13 @@ namespace GC_Scheduler
                 listing.GapLine(5f);
                 // Display option whether or not to force pause the game when the menu is opened
                 listing.CheckboxLabeled("lblForcePause".Translate(), ref forcePause, "lblForcePauseDescription".Translate());
-                listing.Gap(5f);
+                listing.GapLine(5f);
+                listing.Label("lblRunGCWhen".Translate(), tooltip: "lblRunGCWhenDescription".Translate());
+                listing.Gap(2f);
+                listing.CheckboxLabeled("lblRunGConMainTabOpen".Translate(), ref enableGC_OnOpenTab, "lblRunGConMainTabOpenDescription".Translate());
+                listing.Gap(2f);
+                listing.CheckboxLabeled("lblRunGConNotifyOpen".Translate(), ref enableGC_OnOpenMessage, "lblRunGConNotifyOpenDescription".Translate());
+                listing.GapLine(5f);
 
                 listing.Label("lblSetTickInterval".Translate() + ": " + updateInterval + " " + "lblTicks".Translate(), tooltip: "lblSetTickIntervalDescription".Translate());
                 Rect section2 = new Rect(rect.x + sectionOffsetX, rect.y + listing.CurHeight + 10f + sectionOffsetY, rect.width, 25f);
@@ -100,7 +108,7 @@ namespace GC_Scheduler
             }
 
             List<ListableOption> list = new List<ListableOption>();
-            if (UnityEngine.Scripting.GarbageCollector.GCMode == UnityEngine.Scripting.GarbageCollector.Mode.Enabled) // If GC is enabled, show disable button and vice versa
+            if (UnityEngine.Scripting.GarbageCollector.GCMode == UnityEngine.Scripting.GarbageCollector.Mode.Enabled && !gcScheduler) // If GC is enabled, show disable button and vice versa
             {
                 GUI.color = Color.red; // Sets color to red so proceeding GUI is in red
                 list.Add(new ListableOption("BtnStopGC1".Translate() + "\n" + "BtnStopGC2".Translate(), delegate () // disable GC button

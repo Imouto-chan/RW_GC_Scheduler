@@ -20,7 +20,7 @@ namespace GC_Scheduler
 
         public override Vector2 RequestedTabSize
         {
-            get { return new Vector2(250f, 405f); } // Size of window tab to open
+            get { return new Vector2(250f, 455f); } // Size of window tab to open
         }
 
         public override MainTabWindowAnchor Anchor
